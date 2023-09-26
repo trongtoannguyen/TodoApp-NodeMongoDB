@@ -1,6 +1,9 @@
-require("dotenv").config();
-const { MongoClient } = require("mongodb");
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
 const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri);
+function connect() {
+  mongoose.connect(uri).catch((err) => handleError(err));
+}
 
-module.exports = client;
+module.exports = { connect };
